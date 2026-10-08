@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from PySide6.QtCore import QBuffer, QIODevice, QRectF, Qt, Signal
-from PySide6.QtGui import QColor, QIcon, QImage, QImageReader, QPainter, QPainterPath, QPen, QPixmap
+from PySide6.QtGui import QColor, QIcon, QImage, QImageReader, QPainter, QPainterPath, QPalette, QPen, QPixmap
 from PySide6.QtWidgets import (
     QApplication, QComboBox, QFileDialog, QFormLayout, QGraphicsBlurEffect, QGraphicsPixmapItem,
     QGraphicsScene, QHBoxLayout, QLabel, QMessageBox, QPushButton, QSlider, QSpinBox, QVBoxLayout,
@@ -367,7 +367,9 @@ class Window(QWidget):
         title.setAlignment(Qt.AlignCenter)
         hint = QLabel("Drag the box or use the sliders to choose what shows on the dock")
         hint.setAlignment(Qt.AlignCenter)
-        hint.setEnabled(False)
+        pal = hint.palette()
+        pal.setColor(QPalette.WindowText, pal.color(QPalette.PlaceholderText))
+        hint.setPalette(pal)
 
         self.choose = QPushButton("Choose Image…")
         self.file_label = QLabel("No image selected")
@@ -418,8 +420,8 @@ class Window(QWidget):
         self.restore = QPushButton("Restore Original")
         self.apply = QPushButton("Apply")
         self.apply.setDefault(True)
-        self.apply.setStyleSheet("QPushButton { background: #3584e4; color: white; font-weight: bold; padding: 8px; }")
-        self.restore.setStyleSheet("QPushButton { padding: 8px; }")
+        for b in (self.apply, self.restore):
+            b.setMinimumHeight(36)
         buttons = QHBoxLayout()
         buttons.addWidget(self.restore, 1)
         buttons.addWidget(self.apply, 1)
