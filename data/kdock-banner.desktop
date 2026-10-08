@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Dock Banner
+GenericName=Panel Image
+Comment=Put an image or blurred image on the KDE Plasma panel
+Exec=@BIN@ %f
+Icon=kdock-banner
+Terminal=false
+MimeType=image/png;image/jpeg;image/webp;image/bmp;image/gif;
+Categories=Qt;KDE;Settings;DesktopSettings;
+Keywords=panel;dock;banner;wallpaper;blur;plasma;theme;
+StartupNotify=true
